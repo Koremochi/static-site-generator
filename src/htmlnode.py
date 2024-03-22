@@ -29,14 +29,9 @@ class LeafNode(HTMLNode):
         leafnode = self.value
         if self.value is None:
             raise ValueError("LeafNode needs to have a value")
-
         if self.tag is None:
             return leafnode
-        elif not self.tag is None and not self.props is None:
-            for key, value in self.props.items():
-                leafnode = f'<{self.tag} {key}="{value}">' + leafnode + f'</{self.tag}>'
-        else:
-            leafnode = f"<{self.tag}>" + leafnode + f"</{self.tag}>"
+        leafnode = f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
 
         return leafnode
 
